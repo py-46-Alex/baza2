@@ -63,10 +63,9 @@ print(f'Имена трэков более 3.5 минут: {litle_track}')
 name_of_alboms = connection.execute("""SELECT album_name FROM albums WHERE year BETWEEN 2018 AND 2020;""").fetchmany(1000)
 print(f'Имена сборников вышедших в период с 2018 по 2020 год: {name_of_alboms}')
 
-#исполнители, чье имя состоит из 1 слова;
-#thing_1 = connection.execute("""SELECT name FROM artist WHERE len(name) = 1;""").fetchmany(1000)
-#print(f'Исполнители, чье имя состоит из 1 слова: {thing_1}')
-# Не понял почему не работает запрос
+# исполнители, чье имя состоит из 1 слова;
+thing_1 = connection.execute("""SELECT name FROM artist WHERE name NOT iLIKE '%% %%';""").fetchmany(1000)
+print(f'Исполнители, чье имя состоит из 1 слова: {thing_1}')
 
 # название треков, которые содержат слово "мой"/"my"
 my_like = connection.execute("""SELECT track_name FROM track_info WHERE track_name iLIKE '%%my%%';""").fetchmany(1000)
